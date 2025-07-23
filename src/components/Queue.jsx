@@ -17,7 +17,7 @@ function Queue() {
     try {
       const response = await getAllEntries();
 
-      setEntries(response.data.reverse().slice(0, 10));
+      setEntries(response.data.slice(0, 10));
     } catch (error) {
       console.log(error);
     }
