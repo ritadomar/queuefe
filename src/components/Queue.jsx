@@ -1,4 +1,4 @@
-import { getAllEntries, addEntry } from '../api/entries.api';
+import { getAllEntries, addEntry, deleteEntry } from '../api/entries.api';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 function Queue() {
   const [entries, setEntries] = useState(null);
   const [entry, setEntry] = useState(null);
+  const [entryId, setEntryId] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -15,7 +17,6 @@ function Queue() {
     try {
       const response = await getAllEntries();
 
-      console.log(response.data.reverse().slice(0, 10));
       setEntries(response.data.reverse().slice(0, 10));
     } catch (error) {
       console.log(error);
@@ -40,9 +41,19 @@ function Queue() {
     }
   };
 
+  const handleDelete = async num => {
+    try {
+      setEntryId(num);
+      await deleteEntry(num);
+      setDeleting(!deleting);
+    } catch (error) {
+      console.log(error);
+      //   setError(error.response.data.message);
+    }
+  };
   useEffect(() => {
     getEntries();
-  }, [entry]);
+  }, [entry, deleting]);
 
   return (
     <>
@@ -50,7 +61,21 @@ function Queue() {
       {entries && (
         <ol>
           {entries.map(entry => {
-            return <li key={entry._id}>{entry.entry.name}</li>;
+            return (
+              <li key={entry._id}>
+                {entry.entry.name}
+                {user.isAdmin && (
+                  <button
+                    onClick={() => {
+                      handleDelete(entry._id);
+                    }}
+                    type="submit"
+                  >
+                    Yo
+                  </button>
+                )}
+              </li>
+            );
           })}
         </ol>
       )}
