@@ -80,7 +80,7 @@ nav {
 
   padding-bottom: 2px;
 
-  background-image: url('src/assets/logo-background.png');
+  background-image: url('../src/assets/logo-background.png');
   background-size: cover;
 }
 .logout {
