@@ -32,8 +32,7 @@ function Home() {
       )}
       {isLoggedIn && (
         <>
-          <button onClick={logOutUser}>Log Out</button>
-          <h2>Hello {user.name}</h2>
+
           <h2>Next in line</h2>
           <Queue />
         </>
