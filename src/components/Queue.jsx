@@ -2,6 +2,7 @@ import { getAllEntries, addEntry, deleteEntry } from '../api/entries.api';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/auth.context';
 import { useNavigate } from 'react-router-dom';
+import { DeleteIcon } from 'raster-react';
 
 function Queue() {
   const [entries, setEntries] = useState(null);
@@ -56,10 +57,11 @@ function Queue() {
   }, [entry, deleting]);
 
   return (
-    <>
-      {(!entries || entries.length <= 0) && <p>No entries yet</p>}
+    <section className="queue-wrap">
+      <h2>Next in line</h2>
+      {(!entries || entries.length <= 0) && <p>The queue is empty.</p>}
       {entries && (
-        <ol>
+        <ol className="queue">
           {entries.map(entry => {
             return (
               <li key={entry._id}>
@@ -70,8 +72,14 @@ function Queue() {
                       handleDelete(entry._id);
                     }}
                     type="submit"
+                    className="delete"
                   >
-                    Yo
+                    <DeleteIcon
+                      size={24}
+                      color="#d95858ff"
+                      strokeWidth={0.25}
+                      radius={1}
+                    />
                   </button>
                 )}
               </li>
@@ -86,12 +94,13 @@ function Queue() {
               setUserId(user._id);
             }}
             type="submit"
+            className="primary wide"
           >
             Put me on the queue
           </button>
         </form>
       )}
-    </>
+    </section>
   );
 }
 

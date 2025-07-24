@@ -24,16 +24,15 @@ function Home() {
 
   return (
     <main>
+      <h1 aria-label="Rita & Lobo's Game Night" className="sr-only"></h1>
+
       {!isLoggedIn && (
         <>
-          <h2>What's your name?</h2>
           <SignUp />
         </>
       )}
       {isLoggedIn && (
         <>
-
-          <h2>Next in line</h2>
           <Queue />
         </>
       )}

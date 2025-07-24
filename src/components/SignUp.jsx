@@ -33,10 +33,11 @@ function SignUp() {
   };
 
   return (
-    <main>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          Name
+    <section className="signup">
+      <h2>What's your name?</h2>
+
+      <form onSubmit={handleSubmit} className="signup-form">
+        <label htmlFor="name" aria-label="Name">
           <input
             type="text"
             name="name"
@@ -47,22 +48,26 @@ function SignUp() {
             placeholder="Robalo"
           />
         </label>
-        <button
-          value="reg"
-          onClick={({ target }) => setSubmitType(target.value)}
-          type="submit"
-        >
-          Register
-        </button>
-        <button
-          value="log"
-          onClick={({ target }) => setSubmitType(target.value)}
-          type="submit"
-        >
-          Log In
-        </button>
+        <div className="buttons">
+          <button
+            value="reg"
+            onClick={({ target }) => setSubmitType(target.value)}
+            type="submit"
+            className="login-btn secondary"
+          >
+            Register
+          </button>
+          <button
+            value="log"
+            onClick={({ target }) => setSubmitType(target.value)}
+            type="submit"
+            className="login-btn primary"
+          >
+            Log In
+          </button>
+        </div>
       </form>
-    </main>
+    </section>
   );
 }
 
