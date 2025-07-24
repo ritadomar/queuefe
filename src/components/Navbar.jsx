@@ -10,7 +10,7 @@ function Navbar() {
   return (
     <nav>
       <h1 aria-label="Rita & Lobo's Game Night" className="sr-only"></h1>
-      <img src={logo} alt="Rita & Lobo's Game Night" />
+      <img src={logo} alt="Rita & Lobo's Game Night" className="logo" />
       {isLoggedIn && (
         <>
           <div className="user-icon">
